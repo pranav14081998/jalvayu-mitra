@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JalVayu Mitra | Climate Action Hub</title>
+<style>
+:root{--green:#176b4b;--mint:#e8f5ee;--ink:#19342b;--muted:#64756d;--gold:#f0b44b;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:#f4f8f5;color:var(--ink);font:15px/1.5 Arial,sans-serif}
+header{background:linear-gradient(120deg,#124b38,#21835b);color:white;padding:24px max(20px,calc((100% - 1100px)/2))}
+.brand{font-size:25px;font-weight:800;letter-spacing:.2px}.tag{opacity:.9;margin-top:3px}
+main{max-width:1100px;margin:24px auto;padding:0 18px}.hero{background:white;border-radius:18px;padding:24px;box-shadow:0 5px 20px #183c2b12;display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+h1{font-size:28px;margin:0 0 8px}.hero p{color:var(--muted);max-width:650px;margin:0}.pill{background:#e4f4e9;color:#176b4b;padding:7px 12px;border-radius:30px;font-weight:700;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;margin:18px 0}.card{background:white;border-radius:16px;padding:18px;box-shadow:0 4px 16px #183c2b0c}.label{color:var(--muted);font-size:13px}.metric{font-size:29px;font-weight:800;margin:5px 0}.green{color:var(--green)}.section{margin-top:25px}.section h2{font-size:20px;margin:0 0 12px}
+.actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.action{border:1px solid #e0eae3;border-radius:13px;padding:15px;background:#fbfdfb}.action b{display:block;margin-bottom:5px}.action p{margin:0;color:var(--muted);font-size:13px}
+button{background:var(--green);border:0;color:white;padding:11px 16px;border-radius:9px;font-weight:700;cursor:pointer}button.secondary{background:#e8f5ee;color:var(--green)}input,select{padding:11px;border:1px solid #ccd9d0;border-radius:9px;width:100%;margin:5px 0 12px;background:white}
+.result{background:#e8f5ee;border-radius:12px;padding:14px;margin-top:10px;display:none}.footer{color:#718078;font-size:12px;text-align:center;padding:25px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}nav button{background:#e3eee7;color:#205d43}nav button.active{background:#176b4b;color:white}.panel{display:none}.panel.active{display:block}
+</style></head>
+<body>
+<header><div class="brand">🌍 JalVayu Mitra</div><div class="tag">AI-powered climate awareness & local action assistant</div></header>
+<main>
+<div class="hero"><div><h1>Small actions. Cooler future.</h1><p>Understand climate risks, estimate your everyday carbon footprint, and discover practical actions for your home, school and community.</p></div><span class="pill">WORKING PROTOTYPE • DEMO DATA</span></div>
+<nav><button class="active" onclick="showTab('home',this)">Dashboard</button><button onclick="showTab('footprint',this)">Carbon calculator</button><button onclick="showTab('actions',this)">Action planner</button><button onclick="showTab('school',this)">School challenge</button></nav>
+<section id="home" class="panel active">
+<div class="grid">
+<div class="card"><div class="label">Today's climate tip</div><div class="metric">🌱</div><b>Choose a low-carbon trip</b><div class="label">Walk, cycle or share a ride when practical.</div></div>
+<div class="card"><div class="label">Community action target</div><div class="metric green">100</div><div class="label">Trees to nurture this season (sample goal)</div></div>
+<div class="card"><div class="label">School energy goal</div><div class="metric green">−10%</div><div class="label">Illustrative electricity-saving target</div></div>
+<div class="card"><div class="label">Climate-ready habit</div><div class="metric">💧</div><b>Save water</b><div class="label">Fix leaks and avoid unnecessary water use.</div></div>
+</div>
+<div class="section"><h2>How JalVayu Mitra helps</h2><div class="actions">
+<div class="action"><b>📍 Local risk awareness</b><p>Explains heat, heavy-rain and water-stress preparedness using trusted local advisories.</p></div>
+<div class="action"><b>📊 Personal footprint</b><p>Turns travel and electricity habits into a simple illustrative emissions estimate.</p></div>
+<div class="action"><b>🎯 Action recommendations</b><p>Suggests realistic steps and tracks community participation.</p></div>
+</div></div></section>
+<section id="footprint" class="panel section"><h2>Simple carbon footprint estimator</h2><p class="label">Enter approximate monthly usage. This demo uses illustrative factors, not an official inventory.</p>
+<div class="card"><label>Electricity used (kWh/month)</label><input id="kwh" type="number" min="0" value="100"><label>Petrol used (litres/month)</label><input id="petrol" type="number" min="0" value="10"><label>Car travel (km/month)</label><input id="km" type="number" min="0" value="100"><button onclick="calc()">Estimate my footprint</button><div id="result" class="result"></div></div></section>
+<section id="actions" class="panel section"><h2>Your 7-day climate action plan</h2><div class="card"><p>Choose actions and mark them complete. Your progress is saved only in this page while it remains open.</p>
+<div id="tasks"></div><div class="metric green" id="progress">0 / 5 completed</div></div></section>
+<section id="school" class="panel section"><h2>Green School Challenge</h2><div class="card"><p><b>Challenge:</b> Make one measurable improvement this month.</p><ul><li>Switch off lights, fans and computers when not needed.</li><li>Run a classroom waste-segregation activity.</li><li>Plant native trees and assign student care teams.</li><li>Promote refillable bottles and reduce single-use plastic.</li></ul><label>School / team name</label><input id="team" placeholder="Enter your school or team"><label>Action selected</label><select id="challenge"><option>Energy saving audit</option><option>Tree care and biodiversity</option><option>Waste segregation</option><option>Water conservation</option></select><button onclick="join()">Create challenge pledge</button><div id="pledge" class="result"></div></div></section>
+<div class="footer">JalVayu Mitra • Educational prototype • Demo values are illustrative; no live weather or AI service is connected.</div>
+</main>
+<script>
+function showTab(id,b){document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
+function calc(){let e=+document.getElementById('kwh').value||0,p=+document.getElementById('petrol').value||0,k=+document.getElementById('km').value||0;let total=e*.7+p*2.31+k*.17;let r=document.getElementById('result');r.style.display='block';r.innerHTML='<b>Estimated total: '+total.toFixed(1)+' kg CO₂e / month</b><br><small>Illustrative factors: electricity 0.7 kg/kWh, petrol 2.31 kg/litre, car travel 0.17 kg/km. Actual values vary by grid, vehicle and methodology.</small><br><br><b>Try:</b> reduce unnecessary electricity use, combine trips and use public transport where possible.'}
+let tasks=['Switch off unused lights and fans','Carry a reusable water bottle','Avoid one unnecessary motorbike/car trip','Segregate wet and dry waste','Water and care for a native plant'];
+let done=new Set();document.getElementById('tasks').innerHTML=tasks.map((t,i)=>'<label style="display:block;padding:8px 0"><input style="width:auto;margin:0 8px 0 0" type="checkbox" onchange="mark('+i+',this.checked)">'+t+'</label>').join('');
+function mark(i,v){v?done.add(i):done.delete(i);document.getElementById('progress').textContent=done.size+' / 5 completed'}
+function join(){let n=document.getElementById('team').value.trim()||'Our team',a=document.getElementById('challenge').value;let p=document.getElementById('pledge');p.style.display='block';p.innerHTML='<b>🌿 Pledge created!</b><br>'+n+' will take up: '+a+'. Share progress with your school community.'}
+</script></body></html>
